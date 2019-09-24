@@ -1,0 +1,46 @@
+Péptidos Anti Microvianos
+
+1) Son producidos en el retículo endoplasmático (en gral)
+2) Tienen una señal de 6 AA Hidrofóbicos que indica producción en el RE
+
+
+Ejemplos proteínas secretadas:
+
+E. granulosus
+1) EgAgB - parte de la familia de las proteínas de unión a ligandos hidrofóbicos o HLBP - ¿lípidos del hospedero al parásito?
+1) Eg95 - Invasión al huesped ¿Adhesión celular durante la activación de la oncófera? - antígenos relacionados de Taenia (45W, 18K y 16K), que muestran una estructura y un patrón de expresión molecular similar a EG95 (Waterkeyn et al. 1997),
+
+
+
+Ver papers: (Reynolds et al. 2015; Kreisinger et al. 2015; Zaiss y Harris 2016; McSorley y Maizels 2012)
+
+
+Peptidos microbianos:
+"Dentro de las familias de proteínas de secreción se dará un espacio de atención al análisis de péptidos antimicrobianos, un grupo particular de proteínas cortas de entre 12 y 50 residuos de largo con propiedades antibióticas, secretados como medio de defensa contra bacterias gram negativas y positivas, virus e incluso hongos."
+
+
+Le plan:
+1) Detectar proteínas de secreción en base al p{eptido señal ¿A partir de donde? ¿El genoma?
+	->>>  SigmaIP v4.0 (Petersen et al. 2004)
+2) Curzar los resultados con PrediSi
+(Hiller et al. 2004), Signal-CF (Chou and Shen 2007), Phobius (Kall et al. 2007) y Signal-BLAST (Frank y Sippl 2008)
+
+Seguir ejemplo de Choo et al. (2009)
+
+3) Identificación de péptidos microbianos (Esta es la parte que creo me tocaría)
+
+	Integrar predictores: 
+		-> AntiBP2 (Lata et al. 2010)
+		-> APD3 (Wang et al. 2010) 
+		-> iAMP-2L (Xiao et al. 2013)
+		-> DBAASP v2 (Pirtskhalava et al. 2015)
+		-> AMPA (Torrent et al. 2011)
+
+	So Le-Le plan: Tomar todas las proteínas de las especies a considerar (peguntar cuales y de donde) y aplicar todos estos métodos a ver que dan y cruzarlos.
+		
+4) Análisis filogenéticos? phymML
+
+5) Análisis de selección? Paml
+
+6) Contexto genético? Mauve (Darling et al., 2010)
+

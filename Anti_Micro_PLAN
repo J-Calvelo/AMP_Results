@@ -1,0 +1,218 @@
+Plan para analizar peptidos antimicrobianos (AMP)
+
+Pregunta: ¿Los parásitos que habitan distintas regiones del hospedero utilizan distintos peptidos antimicrobianos? ¿Hay diferencas entre estadíos?
+
+The knowns:
+    1) Los peptidos microbianos tienden a ser pequeños, con secuencias nucleotídicas diversas [pero] con varias familias multigénicas conocidas con conservación (algo) de secuencia.
+    
+    2) Donde vive cada parásito y los datos disponibles (ver abajo)
+    
+    3) Hay una multitud de herramientas para la predicción de secuencias anti-microbianas. Pero siguen distintos enfoques y las aclaraciones no son claras.
+    
+    4) Ya hay una anotación del genoma y puedo acceder a ella por Wormbase - Biomart
+    
+    5) Metodos basados en redes neuronales tienden a arrojar malos resultados cuando analizan secuencias con un largo diferente para el que fueron entrenadas.
+    
+    6) Algunos AMP son sintetizados como parte de proteínas más grandes y luego clivados
+    
+    7) En gral tienen una señal de secreción
+    
+    8) Terminos GO relevantes: 
+        -> antimicrobial humoral immune response mediated by antimicrobial peptide (GO:0061844)
+        -> antimicrobial peptide production (GO:0002775)
+        -> antimicrobial peptide biosynthetic process (GO:0002777)
+        -> antimicrobial peptide secretion (GO:0002776) --- Este puede que no corresponda
+    
+The Unknows:
+    1) No se la secuencia señal de secreción (debo averiguarla)
+    
+    2) Puede que tenga que incluir más de un GO term para quedarme con los pep antimicrobianos y no con alguna proteína intermedia
+    
+    3) eggNOG-mapper no incluye platelmintos en su base de datos. Desconozco que tan problemáico sea 
+    
+Especies y datos (Cestodos):
+
+Notas Biología:
+    * Las especies de Echinoccocus son bastante cercanas, o al menos difíciles de diferenciar
+
+
+    + Summary:
+        -> Datos en Wormbase: 3 (Echinococcus granulosus, Echinococcus multilocularis y Hymenolepis microstoma) + 2 con problemas (Taenia saginata y Taenia solium)
+        -> Datos en Wormbase que incluyen al menos 2 estadios: 2 (Echinococcus multilocularis*, Hymenolepis microstoma)
+        -> Datos en el NCBI: Taenia multiceps
+        -> Datos en el NCBI que incluyen al menos 2 estadios: Taenia multiceps
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+    * Genero Echinococcus
+       + Echinococcus canadensis:
+        -> Genoma: PRJEB8992
+        -> Localización:
+            - Adulto: Intestino (Canidos)
+            - Cistecoirde: Tejidos de vertebrado
+            - Oncosferas: ???????
+        -> Datos de expresión diferencial
+            - Wormbase: No
+            - NCBI-SRA: No (miRNA-Seq)
+        -> Lectura de su biología: Profundizar
+       
+       + Echinococcus granulosus
+        -> Genoma: PRJEB121 (el otro no tiene datos de expresión diferencial asociado, aunque tiene 10% más genes...)
+        -> Localización: 
+            - Adulto: Intestino (Canidos)
+            - Cistecoirde: Tejidos de vertebrado
+            - Oncosferas: ???????
+        -> Datos de expresión diferencial
+            - Wormbase: Si (tejidos del adulto)
+            - NCBI-SRA: Si (requiere una mejor revisión)
+        -> Lectura de su biología: Profundizar  
+        
+       + Echinococcus multilocularis:
+        -> Genoma: PRJEB122
+        -> Localización: 
+            - Adulto: Intestino (Canidos)
+            - Cistecoirde: Tejidos de vertebrado
+            - Oncosferas: ???????
+        -> Datos de expresión diferencial
+            - Wormbase: Si (2 trabajos, huevos y adultos)
+            - NCBI-SRA: Si (requiere una mejor revisión)
+        -> Lectura de su biología: Profundizar
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+    * Género Hymenolepis
+       + Hymenolepis diminuta
+        -> Genoma: PRJEB507
+        -> Localización: 
+            - Adulto: ???????
+            - Cistecoirde: ???????
+            - Oncosferas: ???????
+        -> Datos de expresión diferencial
+            - Wormbase: No
+            - NCBI-SRA: Si, subido el mes pasado (Junio 2019) - Conseguir paper
+        -> Lectura de su biología: Aún no
+        
+       + Hymenolepis microstoma       
+        -> Genoma: PRJEB124
+        -> Localización: 
+            - Adulto: Conducto viliar - Ratón (Mus musculus en laboratorio)
+            - Cistecoirde: Escarabajo (Tribolium confusum en el laboratorio)
+            - Oncosferas: Terreno
+        -> Datos de expresión diferencial
+            - Wormbase: Si (Tejidos del adulto y Cistecoirde)
+            - NCBI-SRA: Si (requiere una mejor revisión)
+            - Nuestros (^_^)
+        -> Lectura de su biología: "Description of Hymenolepis microstoma (Nottingham strain): A classical tapeworm model for research in the genomic era"     
+        
+       + Hymenolepis nana
+        -> Genoma: PRJEB508
+        -> Localización: 
+            - Adulto: Intestino
+            - Cistecoirde: Vertebrados (hay autoinfección)
+            - Oncosferas: ???????
+        -> Datos de expresión diferencial
+            - Wormbase: No
+            - NCBI-SRA: No
+        -> Lectura de su biología: "Webb & Camille (2017) Intestinal cestodes" Profundizar
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+               
+    * Género Taenia
+       + Taenia asiatica
+        -> Genoma: PRJNA299871 (Más completo)
+        -> Localización: 
+            - Adulto: Intestino Humanos
+            - Cistecoirde: cerdo principamente (Vertebrados)
+            - Oncosferas: ???????
+        -> Datos de expresión diferencial
+            - Wormbase: No
+            - NCBI-SRA: No
+        -> Lectura de su biología: "Webb & Camille (2017) Intestinal cestodes" Profundizar          
+
+       + Taenia multiceps
+        -> Genoma: PRJNA307624
+        -> Localización: 
+            - Adulto: ???????
+            - Cistecoirde: ???????
+            - Oncosferas: ???????
+        -> Datos de expresión diferencial
+            - Wormbase: No
+            - NCBI-SRA: Si, los 3 estadíos (PRJNA307624)
+        -> Lectura de su biología: Aún no (Leer "Detailed transcriptome description of the neglected cestode Taenia multiceps")
+ 
+       + Taenia saginata
+        -> Genoma: PRJNA71493
+        -> Localización: 
+            - Adulto: Intestino humanos
+            - Cistecoirde: bovinos (Vertebrados)
+            - Oncosferas: ???????
+        -> Datos de expresión diferencial
+            - Wormbase: "Si" (These studies are available in ENA, and the reads successfully align to our genomes. // We have decided not to include them in our analysis. // Either they failed to meet minimal criteria for inclusion, we've been asked to exclude them for data quality reasons, or we were unable to interpret the metadata.) (Not a clue - SRP046055)
+            - NCBI-SRA: ----
+        -> Lectura de su biología: "Webb & Camille (2017) Intestinal cestodes" Profundizar    
+        
+       + Taenia solium
+        -> Genoma: PRJNA170813
+        -> Localización: 
+            - Adulto: Intestino (Vertebrado)
+            - Cistecoirde: Cerdo (Vertebrado)
+            - Oncosferas: ???????
+        -> Datos de expresión diferencial
+            - Wormbase: "Si" (These studies are available in ENA, and the reads successfully align to our genomes. // We have decided not to include them in our analysis. // Either they failed to meet minimal criteria for inclusion, we've been asked to exclude them for data quality reasons, or we were unable to interpret the metadata.) (Not a clue - SRP077984)
+            - NCBI-SRA: ----
+        -> Lectura de su biología: "Webb & Camille (2017) Intestinal cestodes" Profundizar
+        
+¿Qué puedo y no puedo hacer con estos datos?
+    1) A nivel de genero, va a ser imposible comparar como se comportan (niveles de expresión) distintos estadíos entre si. Si dentro de una especie y si entre las especies de distintos géneros...
+        -> ¿Tiene sentido? Voy a tener muchas diferencias que se explican por ser especies distintas. Aunque si especies de generos distintos usan peptidos similares en el intestino de vertebrados puedo llegar a tener algo.
+
+    2) Análisis de selección positiva
+        -> Identificar genes homologos ortólogos y hacer análisis de selección natural
+    
+    3) Dependiendo de como sean los datos de Hymenolepis diminuta puede que pueda comparar Intestino - Ducto biliar a nivel de expresión diferencial en adultos.
+    
+    4) Podría fijarme si los huevos activados de Echinococcus multilocularis funcionan distinto que ls inactivados... No creo que valga la pena (ERP001209)
+    
+The plan:
+    1) Identificación de peptidos anti-microbianos
+        -> A partir de la anotación del genoma
+            + Biomart: Ver que genes tienen los terminos GO relevantes asignados
+        -> BLAST contra peptidos anti microbianos ya descritos
+            + BLASTP: contra las proteínas usadas para entrenar las bases de datos 
+        -> Las herramientas de predcción de peptidos
+            * Usar solo las proteínas que no hayan sido catalogadas previamente
+            + CAMPR3 (Puedo presentar un buen argumento, con bibliografía, a favor de porque solo usarlo)
+
+    2) Catalogar las AMPs en familias
+        -> BLAST
+            + BLASTP: Usar los resultados del BLAST previo
+        -> Bases de datos proteicas
+            + InterPro: Identificar los dominios (debo estudiar como funciona interpro)
+        -> Agrupar lo que no sea anotado hasta ahora
+            + CD-HIT: Hacerlo por identidad
+            + ?????????
+            
+    3) Determinación del numero de copias
+        * ¿Localización en el genoma? ¿filogenias? No estoy seguro
+        
+    4) Expresión diferencial
+        
+            || HAY QUE DECIDIR QUE CAMINO TOMAR ||
+
+        a) Solo Wormbase: Cruzar los datos entre las distintas tablas
+        
+        b) Incluyendo Wormbase:
+            -> Reproducir su metodología (BUSCAR) Puede que de resultados negativos en algunos casos por los controles de calidad
+            
+        c) Mapear al genoma de referencia con todos los datos y re-hacer los análisis
+        
+    5) Selección natural
+        -> Recuperar la secuencia nucleotìdica de los AMPs
+            + Descargarlas de la base de datos
+        -> Alinear secuencias
+            + MAFFT
+            + (Buscar un alineador que respete codones)
+        -> Selección natural
+            + PAML (Seguramente solo el de sitios)
+            + MEME
+            

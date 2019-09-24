@@ -1,0 +1,176 @@
+21/06/2019: Comienzo a familiarizarme con el tema, leyendo e instalando los programas que seràn utilizados en la predicción de péptidos:
+
+Programa	Leido	Instalado	Desc.				Paper
+AntiBP2		O	X		Red neural entrenada		AntiBP2: Improved version of antibacterial peptide prediction 
+APD3 		O	X		Base de datos			APD3: the antimicrobial peptide database as a tool for research and education
+iAMP-2L		O	X		Predictor que no entiendo	iAMP-2L: A two-level multi-label classifier for identifying antimicrobial peptides and their functional types
+DBAASP v2	O	X		Base de datos			DBAASP v.2: an enhanced database of structure and antimicrobial/cytotoxic activity of natural and synthetic peptides
+AMPA		O	X		Predictor que no comprendo	AMPA: an automated web server for prediction of protein antimicrobial regions
+AmPEP		O	X		Serie de predictor		AmPEP: Sequence-based prediction of antimicrobial peptides using distribution patterns of amino acid properties and random forest			
+iAMPpred	O	X		Predictores			Predicting antimicrobial peptides with improved accuracy by incorporating the compositional, physico-chemical and structural features into Chou’s general PseAAC
+CAMPR3		O	X		Composición AA			CAMP R3 : a database on sequences, structures and signatures of antimicrobial peptides
+modlAMP		O	*		paquete 			modlAMP: Python for antimicrobial peptides
+
+No todos son instalables. Servidores web:
+1) AntiBP2: https://webs.iiitd.edu.in/raghava/antibp2/submit.html
+2) APD3: http://aps.unmc.edu/AP/main.php
+3) iAMP-2L: http://www.jci-bioinfo.cn/iAMP-2L
+4) DBAASP v2: https://dbaasp.org/
+5) Ampa: http://tcoffee.crg.cat/apps/ampa/do
+6) iAMPpred: http://cabgrid.res.in:8080/amppred/server.php
+
+Notas:
+AntiBP2 - Es peor a su predecesor segun: "Empirical comparison of web-based antimicrobial peptide prediction tools" - y el  anterior tambièn puede venir con lios 
+APD3 - Puedo subir un pèptido a la vez, aún no sé como funciona.
+iAMP-2L - El infierno se va a llenar de chocolate antes de que entienda como funciona. Solo puedo subir de a 500 a la vez via web
+DBAASP v2 - Tiene la opciòn de predecir péptidos mediante el uso de descriptores de las propiedades físicas de los péptidos. Pero se especializa en unùnico tipo de categoría de pep. anti microbiano  (cationic linier peptides)
+iAMPpred - Basado en features, candidato para todos
+modlAMP - Packete de python con cosas varias. Sería ideal para Herman
+
+This analysis allows us to confirm that the best-performing AMP predictor is CAMPR3(RF), followed by CAMPR3(SVM) and then ADAM.
+
+ALERTA: We see, for example, that CAMPR3(SVM) is largely indifferent to sequence length until the query is 100 amino acids long, at which point the sequences are all assigned scores very close to 1.0. CAMPR3(RF) shows a similar, though not quite as pronounced, trend. Some of the other predictors, including ADAM, MLAMP and BAGEL3, show length dependencies.
+
+
+8/09/2019: Descargando datos (31 especies)
+
+# Cestoda (15)
+
+Dibothriocephalus latus: PRJEB1206
+Echinococcus canadensis: PRJEB8992
+Echinococcus granulosus:  PRJEB121 (Orgullo local, mejores etadísticas del genoma)
+Echinococcus multilocularis: PRJEB122
+Hydatigera taeniaeformis (Taenia taeniaeformis): PRJEB534
+Hymenolepis diminuta: PRJEB507
+Hymenolepis microstoma: PRJEB124
+Hymenolepis nana: PRJEB508
+Mesocestoides corti: PRJEB510
+Schistocephalus solidus: PRJEB527
+Spirometra erinaceieuropaei: PRJEB1202
+Taenia asiatica: PRJNA299871 (Más completo)
+Taenia multiceps: PRJNA307624
+Taenia saginata: PRJNA71493
+Taenia solium: PRJNA170813
+
+# Trematoda (12)
+
+Clonorchis sinensis: PRJNA386618 (Más nuevo)
+Echinostoma caproni: PRJEB1207
+Fasciola hepatica: PRJEB25283 (Más nuevo)
+Opisthorchis viverrini: PRJNA222628
+Schistosoma curassoni: PRJEB519
+Schistosoma haematobium: PRJNA78265
+Schistosoma japonicum: PRJEA34885
+Schistosoma mansoni: PRJEA36577
+Schistosoma margrebowiei: PRJEB522
+Schistosoma mattheei: PRJEB523
+Schistosoma rodhaini: PRJEB526
+Trichobilharzia regenti: PRJEB4662
+
+# Monogenea (2)
+
+Gyrodactylus salaris: PRJNA244375
+Protopolystoma xenopodis: PRJEB1201
+
+# Otros (2)
+
+Macrostomum lignano: PRJNA284736 (Mejor en teoria)
+Schmidtea mediterranea: PRJNA12585
+
+
+############################################
+
+Herramientas a considerar:
+
+1) CAMPR3-RF: Permite subir todo de una. La salida en una tabla con las secuencias del 1 a N con la categoría de pep antimicrobiano y la prob
+	-->> Seleccionado porque una revisión dice que es buena
+	-->> Hay que tener cuidado si la secuencia es muy larga
+	-->> Después de identificar las secuencias hay que seguirlas estudiando para clasificarlas mejor
+	-->> Varias de las herramientas parecen estar fuera de linea -.-"
+
+2) iAMPpred: Momentaneamente fuera de linea
+	-->> Es global
+	-->> Hay que subirlas de a poco -.-"
+
+
+
+09/07/2019: Ideas... Que tal evaluar que proteínas podrìan ser anti microbiales y luego:
+	1) Tomar las probetedoras y blastearlas contra la base de datos de pepanti microbianos
+	2) Evaluar quien tiene que respecto a los que tengan hits. No he visto que haya platelmintos en la base de datos así que no tiene mala pinta
+	3) Averiguar otras formas de catalogarlos en familias de pep antimicrobianos
+	4) Re-evaluar decisiones en la vida. Esto es mucho trabajo para hacerlos con todos porque el formato de las bases de datos deja que desear. Creo que no estan pensadas para trabajar asì
+
+
+Ejemplos
+
+1) Encrypted antimicrobial and antitumoral peptides recovered from a protein-rich soybean (Glycine max) by-product
+	-> Usan todos los algoritmos de CAMP-R3. Se quedan con los predichos por al menos 3 algoritmos
+	-> "Alternatively, the β-conglycinin amino acid sequence, the main source of the bioactive peptides from fractions F1 and F2, was used to screen potential antimicrobial sequences using the AMPA algorithm available at http://tcoffee.crg.cat/apps/ampa/do (Torrent et al., 2011)."
+
+	 # Continuación:
+		- Características fisicoquimicas (hidrofobicidad, otros) -> Averiguar como calcularlos. Es medio básico asíque EMBOSS debe tener la respuesta
+		- Validación experimental (No es una opción)
+	
+	# Consideraciones importantes: no estamos teniendo en cuenta que algunas prot antimicrobiales pueden ser producidas como una única prot grande y luego secretadas
+
+2) Structure-guided identification of antimicrobial peptides in the spathe transcriptome of the non-model plant, arum lily (Zantedeschia aethiopica)
+	-> Utilizan una batería de métodos: CS-AMPPred (Porto, Pires, & Franco, 2012), CAMP (Waghu, Barai, Gurung, & Idicula-Thomas, 2016), iAMP-2L (Xiao et al., 2013), ADAM (Lee et al., 2015), and AntiBP2 (Lata, Mishra, & Raghava, 2010).
+		-->> Puedo usar la review para justificar usar solo 1. Creo.
+
+	# Continuación:
+		- Predicción y análisis de la estructura 3D de las proteínas (suena bien pero es hilar muy fino)
+
+3) Adevonin, a novel synthetic antimicrobial peptide designed from the Adenanthera pavonina trypsin inhibitor (ApTI) sequence
+	-> Usan todos los algoritmos de CAMP-R3
+
+
+Evolución de pep Antimicrobianos:
+
+1) Sequence diversity and evolution of antimicrobial peptides in invertebrates
+
+	#### Se centra en insectos y crustaceos
+
+	-> Efectivamente hay peptidos antimicrobianos que se sintetizan como parte de otras proteínas
+		"Some AMPs have been discovered to originate as the processed form of other larger proteins, such as buforin II from histone 2A (Kim et al., 2000) and astacidin1 from hemocyanin (Lee et al., 2003)."
+	-> Han sido peptidos antimicrobianos durante mucho tiempo (afirmación sin cita -.-")
+		"It has been found that AMPs have retained their antimicrobial activity during evolution since they have been used for hundreds of millions of years and yet they have remained effective against microbial targets
+	-> Para la descripción/introducción:
+		"The simultaneous release of multiple AMPs during an immune response might be a key factor that constrains the evolution of the pathogens (Dobson et al., 2013)."
+
+	+ Defensinas: "Defensins are an evolutionarily ancient family of cationic AMPs that are commonly characterized by the presence of six or eight cysteine residues that form three or four intramolecular disulfide bonds, respectively, in a complex folded arrangement of two or three antiparallel b-sheets with or without an a -helix structure (Bulet et al., 2004; Froy, 2005)."
+		      "Defensin and defensin-like genes have been discovered in diverse species of fungi, plants, vertebrates and invertebrates (Bulet et al., 2004; Froy, 2005; Hughes, 1999; Mygind et al., 2005; Semple and Dorin, 2012; Zhu, 2008)." 
+	              "Vertebrate defensins can be classified into the three sub-families of a-defensins (three disulfide bonds are formed by the linkage of C1–C6, C2–C4 and C3–C5), b-defensins (C1–C5, C2–C4 and C3–C6), and h-defensins (a cyclic peptide containing three disulfide bonds), based on the spacing pattern of the six cysteine residues."
+
+		-->> The evolutionary history of invertebrate defensins has already been reviewed elsewhere (Froy, 2005; Froy and Gurevitz, 2003, 2004; Zhu and Gao, 2013).
+	
+	+ Cecropins: "As observed in other gene families, the cecropin multigene family consists of both functional and pseudo-genes. The cecropin family is classified into five sub-types (cecropin A–E) and the members of the cecropin multigene family varied among the species. Cecropin from B. mori was comprised of 13 genes divided into members of four cecropin sub-types (A, B, D and E but not C) (Ponnuvel et al., 2010)"
+	
+	+ Crustins: "Crustins are cationic cysteine-rich AMPs that contain a multidomain region (glycine-rich, proline-rich or cysteine-rich) at the N-terminus and a four-disulfide core (4-DSC) with a whey acidic protein (WAP) domain at the C-terminus (Smith, 2011; Smith et al., 2008; Tassanakajon et al., 2010)."
+
+	+ Anti-lipopolysaccaride factor (ALF): "ALFs are composed of 114–124 amino acid residues with a short signal peptide sequence of 16–26 residues. The molecular mass of the mature peptide is about 11 kDa. According to their pI ALFs were thought to be cationic peptides, but growing evidence has revealed the existence of anionic ALFs (Rosa et al., 2013; Zhang et al., 2010)."
+
+	Consideraciones: 100 AA como punto de corte es muy bajo... probar que pasa si lo agrando (recordar resultados de la revisión de métodos)
+
+2) Evidence for convergent evolution in the antimicrobial peptide system in anuran amphibians
+	
+	-> "In this paper, we restrict our focus to antimicrobial peptides (AMPs), which are widely distributed in the animal kingdom (e.g., horseshoe crabs, insects, mammals and humans) and are considered to be part of the innate immune system as a first line of defense against invading pathogens (e.g., gram-positive and -negative bacteria, fungi and protozoans) [5,40,47]."
+		Usar esto como punto de partida: Clasificación por homología
+		Requiere actualizar
+	
+	-> Identificación basada en BLAST
+
+	-> Nomenclatura ha tener en cuenta: "The aligned dataset is available from the authors on request and follows the proposed nomenclatural systems of Conlon [8,9] and Amiche et al. [2] to designate AMPs wherever possible."
+
+	-> Mucha evolución convergente en Ranas (volver a revisar cuando toque revisar los resultados)
+
+3) Rapid evolution of antimicrobial peptide genes in an insect host–social parasite system
+	
+	-> Estudio de selección natural en AMP específicos
+
+4) Genomic Organization, Molecular Diversification, and Evolution of Antimicrobial Peptide Myticin-C Genes in the Mussel (Mytilus galloprovincialis)
+
+	-> Estudio de selección natural en AMP específicos
+
+5) Adaptive evolution after duplication of penaeidin antimicrobial peptides
+	
+	-> Estudio de selección natural en AMP específicos

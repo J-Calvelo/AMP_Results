@@ -1,2 +1,1 @@
-# AMP_Results
-AMP Analysis
+AMP_Results
